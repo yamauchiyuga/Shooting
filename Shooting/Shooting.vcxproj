@@ -152,6 +152,7 @@
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="BoundingSphere.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Field.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="BoundingSphere.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Field.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>

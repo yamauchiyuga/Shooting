@@ -5,62 +5,58 @@
 #include "Asteroid.h"
 #include "Light.h"
 #include "Camera.h"
+#include "Field.h"
+#include "World.h"
+
 
 // ゲームクラス
 class MyGame : public gslib::Game {
-    // カメラクラス
-    Camera camera_{ nullptr };
-    // ライトクラス
-    Light light_{ nullptr };
-    // アクターマネージャークラス
-    ActorManager manager_;
+    // ワールドクラス
+    World world_;
 
     // 開始
     void start() override {
         // メッシュの読み込み
         gsLoadMesh(Mesh_Player, "Assets/Model/vehicle_playerShip.msh");
         gsLoadMesh(Mesh_Asteroid01, "Assets/Model/prop_asteroid_01.msh");
+        // 背景用画像の読み込み
+        gsLoadTexture(Texture_BgTileNebulaGreen, "Assets/BG/tile_nebula_green_dff.png");
+
+        // フィールドの追加
+        world_.add_field(new Field{ Texture_BgTileNebulaGreen });
+        // カメラの追加
+        world_.add_camera(new Camera{ &world_ });
+        // ライトの追加
+        world_.add_light(new Light{ &world_ });
         // プレーヤの追加
-        manager_.add(new Player{ nullptr, GSvector3{ 0.0f, 0.0f, 0.0f } });
+        world_.add_actor(new Player{ &world_, GSvector3{ 0.0f, 0.0f, 0.0f } });
         // 隕石を３個追加
-        manager_.add(new Asteroid{ nullptr,
+        world_.add_actor(new Asteroid{ &world_,
              GSvector3{ 0.0f , 100.0f, 0.0f }, GSvector3{ 0.0f , -1.0f, 0.0f } });
-        manager_.add(new Asteroid{ nullptr,
+        world_.add_actor(new Asteroid{ &world_,
              GSvector3{  30.0f , 100.0f, 0.0f }, GSvector3{ 0.0f , -1.0f, 0.0f } });
-        manager_.add(new Asteroid{ nullptr,
+        world_.add_actor(new Asteroid{ &world_,
              GSvector3{ -30.0f , 100.0f, 0.0f }, GSvector3{ 0.0f , -1.0f, 0.0f } });
     }
     // 更新
     void update(float delta_time) override {
-        // アクターの更新
-        manager_.update(delta_time);
-        // アクター同士の衝突判定
-        manager_.collide();
-        // アクターの遅延更新
-        manager_.late_update(delta_time);
-        // 死亡しているアクターの削除
-        manager_.remove();
+        // ワールドクラスの更新
+        world_.update(delta_time);
     }
     // 描画
     void draw() override {
-        // カメラの設定
-        camera_.draw();
-        // ライトの設定
-        light_.draw();
-        // アクターの描画
-        manager_.draw();
-        // 半透明アクターの描画
-        manager_.draw_transparent();
-        // GUIの描画
-        manager_.draw_gui();
+        // ワールドクラスの描画
+        world_.draw();
     }
     // 終了
     void end() override {
-        // アクターの消去
-        manager_.clear();
+        // ワールドクラスの消去
+        world_.clear();
         // メッシュの削除
         gsDeleteMesh(Mesh_Player);
         gsDeleteMesh(Mesh_Asteroid01);
+        // テクスチャの削除
+        gsDeleteTexture(Texture_BgTileNebulaGreen);
     }
 };
 
@@ -68,8 +64,3 @@ class MyGame : public gslib::Game {
 int main() {
     return MyGame().run();
 }
-
-
-
-
-

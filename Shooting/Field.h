@@ -14,7 +14,7 @@ public:
 	//
 	void draw()const;
 	//
-	bool is_unsude(const GSvector3& position)const;
+	bool is_inside(const GSvector3& position)const;
 	//
 	bool is_outside(const GSvector3& position)const;
 

@@ -2,6 +2,7 @@
 #include "Assets.h"
 #include "IWorld.h"
 #include "PlayerBullet.h"
+#include"Explosion.h"
 
 // 移動範囲
 const float MovingRangeX = 100.0f;
@@ -39,6 +40,7 @@ void Player::update(float delta_time) {
 	float speed = 1.0f;    // 移動スピード
 	velocity_ = inputVelocity.normalized() * speed * delta_time;
 	// 座標を取得
+
 	GSvector3 position = transform_.position();
 	// 座標に移動量を加算
 	position += velocity_;
@@ -66,6 +68,8 @@ void Player::draw() const {
 void Player::react(Actor& other) {
 	// 敵と衝突した場合は死亡
 	if (other.tag() == "EnemyTag" || other.tag() == "EnemyBulletTag") {
+		// 爆発エフェクトを生成
+		world_->add_actor(new Explosion{ world_, transform_.position() });
 		die();
 	}
 }

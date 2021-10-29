@@ -3,6 +3,7 @@
 #include "Assets.h"
 #include "Field.h"
 #include "EnemyBullet.h"
+#include"Explosion.h"
 
 // コンストラクタ
 Enemy::Enemy(IWorld* world, const GSvector3& position) {
@@ -63,6 +64,8 @@ void Enemy::draw() const {
 // 衝突処理
 void Enemy::react(Actor& other) {
     if (other.tag() == "PlayerTag" || other.tag() == "PlayerBulletTag") {
+        // 爆発エフェクトを生成
+        world_->add_actor(new Explosion{ world_, transform_.position() });
         die();
     }
 }

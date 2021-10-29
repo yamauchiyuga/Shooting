@@ -154,6 +154,9 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBullet.cpp" />
+    <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="ExplosionPartFire.cpp" />
+    <ClCompile Include="ExplosionPartFlash.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
@@ -170,6 +173,9 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyBullet.h" />
+    <ClInclude Include="Explosion.h" />
+    <ClInclude Include="ExplosionPartFire.h" />
+    <ClInclude Include="ExplosionPartFlash.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="IWorld.h" />
     <ClInclude Include="Light.h" />

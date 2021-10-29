@@ -28,6 +28,8 @@ class MyGame : public gslib::Game {
 		gsLoadMesh(Mesh_Enemy, "Assets/Model/vehicle_enemyShip.msh");
 		// 敵弾画像を読み込み
 		gsLoadTexture(Texture_EffectLazerCyan, "Assets/Effect/fx_lazer_cyan_dff.png");
+		//
+		gsLoadTexture(Texture_EffectFlash, "Assets/Effect/part_flash_dff.png");
 		// フィールドの追加
 		world_.add_field(new Field{ Texture_BgTileNebulaGreen });
 		// カメラの追加

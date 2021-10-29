@@ -2,6 +2,7 @@
 #include "Assets.h"
 #include"IWorld.h"
 #include"Field.h"
+#include"Explosion.h"
 
 // コンストラクタ
 Asteroid::Asteroid(IWorld* world, const GSvector3& position, const GSvector3& velocity) {
@@ -36,6 +37,8 @@ void Asteroid::draw() const {
 // 衝突処理
 void Asteroid::react(Actor& other) {
     if (other.tag() == "PlayerTag"||other.tag()=="PlayerBulletTag") {
+        // 爆発エフェクトを生成
+        world_->add_actor(new Explosion{ world_, transform_.position() });
         die();
     }
 }
